@@ -1,5 +1,9 @@
 # Changelog
 
+#### [0.1.1](https://github.com/Gossteer/php-library-glpi) (2021-12-28)
+
+ * up version guzzlehttp 6.3->7.0
+
 #### [0.1.0](https://github.com/glpi-project/php-library-glpi/tree/0.1.0) (2018-03-12)
 
  * fix(itemhandler): call of wrong methods ([a3e1f35](https://github.com/glpi-project/php-library-glpi/commit/a3e1f35))
