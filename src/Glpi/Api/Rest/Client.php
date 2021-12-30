@@ -173,9 +173,23 @@ class Client {
     * @throws Exception
     */
    public function request($method, $uri, array $options = []) {
+      $options['headers']['Content-Type'] = "application/json";
+
+      return $this->requestBasic($method, $uri, $options);
+   }
+
+      /**
+    * Prepare and send a request to the GLPI Api.
+    *
+    * @param $method
+    * @param $uri
+    * @param array $options
+    * @return mixed|null|\Psr\Http\Message\ResponseInterface
+    * @throws Exception
+    */
+    public function requestBasic($method, $uri, array $options = []) {
       $apiToken = $this->addTokens();
       try {
-         $options['headers']['Content-Type'] = "application/json";
          $sessionHeaders = [];
          if ($apiToken) {
             if (key_exists('Session-Token', $apiToken) && $apiToken['Session-Token']) {

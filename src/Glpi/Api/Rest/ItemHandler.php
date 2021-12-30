@@ -526,6 +526,20 @@ class ItemHandler {
     */
    public function addItems($itemType, array $queryString) {
       $options['body'] = json_encode(['input' => $queryString]);
+
+      return $this->addItemsBasic($itemType, $options);
+   }
+
+   /**
+    * Add an object (or multiple objects) into GLPI.
+    *
+    *
+    * @param string $itemType
+    * @param array $options
+    * @return array
+    */
+   public function addItemsBasic($itemType, array $options)
+   {
       $response = $this->client->request('post', $itemType . '/', $options);
       $location = $response->getHeader('location');
       $link = $response->getHeader('Link');
@@ -535,6 +549,23 @@ class ItemHandler {
          'location' => ($location) ? $location[0] : null,
          'link' => ($link) ? $link[0] : null,
       ];
+   }
+
+   /**
+    * Add an Document into GLPI.
+    *
+    * Important: In case of 'multipart/data' content_type (aka file upload),
+    * you should insert your parameters into a 'uploadManifest' parameter.
+    * Theses serialized data should be a json string.
+    *
+    * @param string $itemType
+    * @param array $queryString
+    * @return array
+    */
+    public function addDocuments($itemType, array $queryString) {
+      $options['multipart'] = $queryString;
+
+      return $this->addItemsBasic($itemType, $options);
    }
 
    /**
