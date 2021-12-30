@@ -1,5 +1,9 @@
 # Changelog
 
+#### [0.1.2](https://github.com/Gossteer/php-library-glpi) (2021-12-30)
+
+ * up add Documents & requestBasic
+
 #### [0.1.1](https://github.com/Gossteer/php-library-glpi) (2021-12-28)
 
  * up version guzzlehttp 6.3->7.0
