@@ -527,7 +527,7 @@ class ItemHandler {
    public function addItems($itemType, array $queryString) {
       $options['body'] = json_encode(['input' => $queryString]);
 
-      return $this->addItemsBasic($itemType, $options);
+      return $this->getResponse($this->client->request('post', $itemType . '/', $options));
    }
 
    /**
@@ -538,9 +538,8 @@ class ItemHandler {
     * @param array $options
     * @return array
     */
-   public function addItemsBasic($itemType, array $options)
+   public function getResponse($response)
    {
-      $response = $this->client->request('post', $itemType . '/', $options);
       $location = $response->getHeader('location');
       $link = $response->getHeader('Link');
       return [
@@ -565,7 +564,7 @@ class ItemHandler {
     public function addDocuments($itemType, array $queryString) {
       $options['multipart'] = $queryString;
 
-      return $this->addItemsBasic($itemType, $options);
+      return $this->getResponse($this->client->requestBasic('post', $itemType . '/', $options));
    }
 
    /**
